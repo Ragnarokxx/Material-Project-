@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+
+    <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<!-- Body tag augmented with ngController directive  -->
+<body  ng-controller="CustomerController">
+
+<div class="container">
+<div class="row">
+    <div class="col-lg-12" style="margin-top: 50px;">
+
+        <a href="javascript:void(0)"   ng-click="Order()" data-toggle="modal" data-target="#orderEdit" class="btn btn-primary pull-right" style="margin-right: 50px;"> New Order</a>
+
+        <h1 class="pull-left">Order List</h1>
+
+        <table width="100%">
+            <thead>
+            <tr>
+                <th width="5%">ID </th>
+                <th width="60%"> Company Name </th>
+                <th width="20%">Order Date </th>
+
+                <th width="15%">Tools </th>
+
+            </tr>
+
+            </thead>
+            <tbody>
+            <tr class="animate-repeat" ng-repeat="order in orders">
+                <td> {{ order.orderld }}</td>
+                <td> {{ order.companyName }}</td>
+                <td> {{ order.orderDate }}</td>
+                <td>
+                    <a href="javascript:void(0)"   ng-click="Order(order.orderld)" data-toggle="modal" data-target="#orderEdit" class="btn btn-primary"> Edit</a>
+                    <a href="javascript:void(0);"  ng-click="OrderDelete(order.orderld)" class="btn btn-danger"> Delete </a>
+                </td>
+
+
+            </tr>
+
+            </ul>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" id="orderEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="orderNameHeader">Order</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="orderForm" name="orderForm">
+                    <div class="form-group">
+                        <label for="companyName" class="form-control-label">Company Name:</label>
+                        <input type="text" class="form-control" id="companyName" ng-value="companyName">
+                    </div>
+                    <div class="form-group">
+                        <label for="customerAddress" class="form-control-label">Order Address:</label>
+                        <textarea class="form-control" id="customerAddress"   ng-value="customerAddress"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="orderedltem" class="form-control-label">Order Item:</label>
+                        <input type="text" class="form-control" id="orderedltem"  ng-value="orderedltem">
+                    </div>
+                    <div class="form-group">
+                        <label for="orderCost" class="form-control-label">Order Cost:</label>
+                        <input type="text" class="form-control" id="orderCost"   ng-value="orderCost">
+                    </div>
+                    <input type="hidden" class="form-control" id="orderld" name="orderld"   ng-value="orderId">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="OrderSave()">Save Order</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="node_modules/jquery/dist/jquery.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+<script src="node_modules/angular/angular.js"></script>
+<script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
+<script src="js/custom.js"></script>
+</body>
+</html>
